@@ -1,0 +1,77 @@
+/*
+  psuedoclass -> : special state of a selector (in this case the button selector)
+  visited state => the styling after the visitor has clicked on it (we want it to be the same for both here)
+  
+  if only specify two values for padding, first val is for top and bottom, and seconf for left and right
+  text decoration ( default highlighting and uderlining)
+
+  default display is inline. We want it to be inline-block => treated as text (so we can use text-align in parent container)
+
+  transition is put in the .btn link version to indicate how much time for it to transition to any of the other button states
+*/
+
+.btn {
+	&:link,
+	&:visited {
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 1.5rem 4rem;
+		display: inline-block;
+		border-radius: 10rem;
+		transition: all 0.2s;
+		position: relative;
+		font-size: 1.6rem;
+	}
+
+	&:hover {
+		transform: translateY(-0.3rem);
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
+
+		/* after psuedo element after the hover state 
+			opacity 0 as we want it to disappear
+		*/
+		&::after {
+			transform: scaleX(1.4) scaleY(1.6);
+			opacity: 0;
+		}
+	}
+
+	/* When we have clicked it */
+	&:active {
+		transform: translate(-0.1rem);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
+
+	&--white {
+		background-color: $color-white;
+		color: $color-grey-dark;
+
+		&::after {
+			background-color: $color-white;
+		}
+	}
+	/*
+		 we create a psuedo element that looks like the button which appears and then hides behind button after done. 
+	
+		 so we have create a psuedo element for "after"
+		 the initial state of the after psuedo-element is &btn::after (ie: compared to hover, etc)
+	 */
+	&::after {
+		content: "";
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+		border-radius: 10rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transition: all 0.4s;
+	}
+}
+
+/* animation-fill-mode backwards => all the styles that I had specified or moveInBottom at 0%, they will be applied */
+.btn--animated {
+	animation: moveInBottom 0.5 ease-out 0.75s;
+	animation-fill-mode: backwards;
+}

@@ -1,0 +1,23 @@
+/*     
+  set margin & padding to 0 because we don't want the browser to add anything itself. Clean slate
+  border-box: changes the box model so that borders & padding are no longer added to total width & height 
+
+  by setting a property to inherit over here, it means that any box-sizing that is specified by the main parent will be inherited. 
+  ie: boz sizing in body to be inherited
+*/
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+/* Setting root font size  -> this also means that 1 rem is 10px
+  However, setting overriding the browser root font-size to 10px makes it difficult for ppl with bad eyesight as they cannot manually adjust
+  Better to assign a percentage
+  ie: if we want 10px -> 10/16 (default) % => 62.5%
+*/
+html {
+	font-size: 62.5%;
+}
