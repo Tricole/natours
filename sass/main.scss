@@ -1,10 +1,14 @@
-/*     
-  set margin & padding to 0 because we don't want the browser to add anything itself. Clean slate
-  border-box: changes the box model so that borders & padding are no longer added to total width & height 
+@import "abstracts/functions";
+@import "abstracts/mixins";
+@import "abstracts/variables";
 
-  by setting a property to inherit over here, it means that any box-sizing that is specified by the main parent will be inherited. 
-  ie: boz sizing in body to be inherited
-*/
+@import "base/base";
+@import "base/animations";
+@import "base/typography";
+@import "base/utilities";
+
+@import "pages/home";
+
 $color-primary: #55c57a;
 $color-primary-light: #7ed56f;
 $color-primary-dark: #28b485;
@@ -12,6 +16,13 @@ $color-grey-dark: #777;
 $color-white: #fff;
 $color-black: #000;
 
+/*     
+  set margin & padding to 0 because we don't want the browser to add anything itself. Clean slate
+  border-box: changes the box model so that borders & padding are no longer added to total width & height 
+
+  by setting a property to inherit over here, it means that any box-sizing that is specified by the main parent will be inherited. 
+  ie: boz sizing in body to be inherited
+*/
 *,
 *::after,
 *::before {
