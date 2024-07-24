@@ -81,7 +81,6 @@ body {
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
-
 .heading-primary--main {
   display: block;
   font-size: 6rem;
@@ -91,11 +90,10 @@ body {
   animation-duration: 1s;
   animation-timing-function: ease-out;
   /*
-   animation-iteration-count: 3;
-   animation-delay: 3s;
-   */
+  animation-iteration-count: 3;
+  animation-delay: 3s;
+  */
 }
-
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
@@ -151,8 +149,16 @@ body {
 
   transition is put in the .btn link version to indicate how much time for it to transition to any of the other button states
 */
-.btn:link,
-.btn:visited {
+.btn {
+  /* When we have clicked it */
+  /*
+  	 we create a psuedo element that looks like the button which appears and then hides behind button after done. 
+
+  	 so we have create a psuedo element for "after"
+  	 the initial state of the after psuedo-element is &btn::after (ie: compared to hover, etc)
+   */
+}
+.btn:link, .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1.5rem 4rem;
@@ -162,29 +168,28 @@ body {
   position: relative;
   font-size: 1.6rem;
 }
-
 .btn:hover {
   transform: translateY(-0.3rem);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* after psuedo element after the hover state 
+  	opacity 0 as we want it to disappear
+  */
 }
-
-/* When we have clicked it */
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
 .btn:active {
   transform: translate(-0.1rem);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
-
 .btn--white {
   background-color: #fff;
   color: #777;
 }
-
-/*
-   we create a psuedo element that looks like the button which appears and then hides behind button after done. 
-
-   so we have create a psuedo element for "after"
-   the initial state of the after psuedo-element is .btn::after (ie: compared to hover, etc)
- */
+.btn--white::after {
+  background-color: #fff;
+}
 .btn::after {
   content: "";
   display: inline-block;
@@ -196,18 +201,6 @@ body {
   left: 0;
   z-index: -1;
   transition: all 0.4s;
-}
-
-.btn--white::after {
-  background-color: #fff;
-}
-
-/* after psuedo element after the hover state 
-  opacity 0 as we want it to disappear
-*/
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
 }
 
 @keyframes moveInBottom {
