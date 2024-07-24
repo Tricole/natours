@@ -10,6 +10,7 @@ $color-primary-light: #7ed56f;
 $color-primary-dark: #28b485;
 $color-grey-dark: #777;
 $color-white: #fff;
+$color-black: #000;
 
 *,
 *::after,
@@ -60,29 +61,29 @@ body {
 	background-position: top;
 	position: relative;
 	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
 
-/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
-.header__logo-box {
-	position: absolute;
-	top: 4rem;
-	left: 4rem;
-}
+	/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
+	&__logo-box {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
 
-.header__logo {
-	height: 3.5rem;
-}
+	&__logo {
+		height: 3.5rem;
+	}
 
-/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
-  So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
-  relative to the element itself)
-*/
-.header__text-box {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
+	/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
+		So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
+		relative to the element itself)
+	*/
+	&__text-box {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
 }
 
 /* 
@@ -96,28 +97,28 @@ body {
 	text-transform: uppercase;
 	backface-visibility: hidden;
 	margin-bottom: 6rem;
-}
 
-.heading-primary--main {
-	display: block;
-	font-size: 6rem;
-	font-weight: 400;
-	letter-spacing: 3.5rem;
-	animation-name: moveInLeft;
-	animation-duration: 1s;
-	animation-timing-function: ease-out;
-	/*
-  animation-iteration-count: 3;
-  animation-delay: 3s;
-  */
-}
+	&--main {
+		display: block;
+		font-size: 6rem;
+		font-weight: 400;
+		letter-spacing: 3.5rem;
+		animation-name: moveInLeft;
+		animation-duration: 1s;
+		animation-timing-function: ease-out;
+		/*
+		animation-iteration-count: 3;
+		animation-delay: 3s;
+		*/
+	}
 
-.heading-primary--sub {
-	display: block;
-	font-size: 2rem;
-	font-weight: 700;
-	letter-spacing: 1.75rem;
-	animation: moveInRight 1s ease-out;
+	&--sub {
+		display: block;
+		font-size: 2rem;
+		font-weight: 700;
+		letter-spacing: 1.75rem;
+		animation: moveInRight 1s ease-out;
+	}
 }
 
 /*
@@ -174,63 +175,65 @@ body {
 
   transition is put in the .btn link version to indicate how much time for it to transition to any of the other button states
 */
-.btn:link,
-.btn:visited {
-	text-transform: uppercase;
-	text-decoration: none;
-	padding: 1.5rem 4rem;
-	display: inline-block;
-	border-radius: 10rem;
-	transition: all 0.2s;
-	position: relative;
-	font-size: 1.6rem;
-}
 
-.btn:hover {
-	transform: translateY(-0.3rem);
-	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
-}
+.btn {
+	&:link,
+	&:visited {
+		text-transform: uppercase;
+		text-decoration: none;
+		padding: 1.5rem 4rem;
+		display: inline-block;
+		border-radius: 10rem;
+		transition: all 0.2s;
+		position: relative;
+		font-size: 1.6rem;
+	}
 
-/* When we have clicked it */
-.btn:active {
-	transform: translate(-0.1rem);
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
-}
+	&:hover {
+		transform: translateY(-0.3rem);
+		box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
 
-.btn--white {
-	background-color: $color-white;
-	color: $color-grey-dark;
-}
+		/* after psuedo element after the hover state 
+			opacity 0 as we want it to disappear
+		*/
+		&::after {
+			transform: scaleX(1.4) scaleY(1.6);
+			opacity: 0;
+		}
+	}
 
-/*
-   we create a psuedo element that looks like the button which appears and then hides behind button after done. 
+	/* When we have clicked it */
+	&:active {
+		transform: translate(-0.1rem);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+	}
 
-   so we have create a psuedo element for "after"
-   the initial state of the after psuedo-element is .btn::after (ie: compared to hover, etc)
- */
-.btn::after {
-	content: "";
-	display: inline-block;
-	height: 100%;
-	width: 100%;
-	border-radius: 10rem;
-	position: absolute;
-	top: 0;
-	left: 0;
-	z-index: -1;
-	transition: all 0.4s;
-}
+	&--white {
+		background-color: $color-white;
+		color: $color-grey-dark;
 
-.btn--white::after {
-	background-color: $color-white;
-}
-
-/* after psuedo element after the hover state 
-  opacity 0 as we want it to disappear
-*/
-.btn:hover::after {
-	transform: scaleX(1.4) scaleY(1.6);
-	opacity: 0;
+		&::after {
+			background-color: $color-white;
+		}
+	}
+	/*
+		 we create a psuedo element that looks like the button which appears and then hides behind button after done. 
+	
+		 so we have create a psuedo element for "after"
+		 the initial state of the after psuedo-element is &btn::after (ie: compared to hover, etc)
+	 */
+	&::after {
+		content: "";
+		display: inline-block;
+		height: 100%;
+		width: 100%;
+		border-radius: 10rem;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		transition: all 0.4s;
+	}
 }
 
 @keyframes moveInBottom {

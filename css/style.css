@@ -47,23 +47,20 @@ body {
   background-position: top;
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* the absolute position is always with reference to a parent container => set the position in the parent to relative */
+  /* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
+  	So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
+  	relative to the element itself)
+  */
 }
-
-/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
 .header__logo-box {
   position: absolute;
   top: 4rem;
   left: 4rem;
 }
-
 .header__logo {
   height: 3.5rem;
 }
-
-/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
-  So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
-  relative to the element itself)
-*/
 .header__text-box {
   position: absolute;
   top: 40%;
@@ -84,7 +81,6 @@ body {
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
-
 .heading-primary--main {
   display: block;
   font-size: 6rem;
@@ -94,11 +90,10 @@ body {
   animation-duration: 1s;
   animation-timing-function: ease-out;
   /*
-   animation-iteration-count: 3;
-   animation-delay: 3s;
-   */
+  animation-iteration-count: 3;
+  animation-delay: 3s;
+  */
 }
-
 .heading-primary--sub {
   display: block;
   font-size: 2rem;
@@ -154,8 +149,16 @@ body {
 
   transition is put in the .btn link version to indicate how much time for it to transition to any of the other button states
 */
-.btn:link,
-.btn:visited {
+.btn {
+  /* When we have clicked it */
+  /*
+  	 we create a psuedo element that looks like the button which appears and then hides behind button after done. 
+
+  	 so we have create a psuedo element for "after"
+  	 the initial state of the after psuedo-element is &btn::after (ie: compared to hover, etc)
+   */
+}
+.btn:link, .btn:visited {
   text-transform: uppercase;
   text-decoration: none;
   padding: 1.5rem 4rem;
@@ -165,29 +168,28 @@ body {
   position: relative;
   font-size: 1.6rem;
 }
-
 .btn:hover {
   transform: translateY(-0.3rem);
   box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  /* after psuedo element after the hover state 
+  	opacity 0 as we want it to disappear
+  */
 }
-
-/* When we have clicked it */
+.btn:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
 .btn:active {
   transform: translate(-0.1rem);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
 }
-
 .btn--white {
   background-color: #fff;
   color: #777;
 }
-
-/*
-   we create a psuedo element that looks like the button which appears and then hides behind button after done. 
-
-   so we have create a psuedo element for "after"
-   the initial state of the after psuedo-element is .btn::after (ie: compared to hover, etc)
- */
+.btn--white::after {
+  background-color: #fff;
+}
 .btn::after {
   content: "";
   display: inline-block;
@@ -199,18 +201,6 @@ body {
   left: 0;
   z-index: -1;
   transition: all 0.4s;
-}
-
-.btn--white::after {
-  background-color: #fff;
-}
-
-/* after psuedo element after the hover state 
-  opacity 0 as we want it to disappear
-*/
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0;
 }
 
 @keyframes moveInBottom {
