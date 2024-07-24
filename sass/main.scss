@@ -10,6 +10,7 @@ $color-primary-light: #7ed56f;
 $color-primary-dark: #28b485;
 $color-grey-dark: #777;
 $color-white: #fff;
+$color-black: #000;
 
 *,
 *::after,
@@ -60,29 +61,29 @@ body {
 	background-position: top;
 	position: relative;
 	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-}
 
-/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
-.header__logo-box {
-	position: absolute;
-	top: 4rem;
-	left: 4rem;
-}
+	/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
+	&__logo-box {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
 
-.header__logo {
-	height: 3.5rem;
-}
+	&__logo {
+		height: 3.5rem;
+	}
 
-/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
-  So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
-  relative to the element itself)
-*/
-.header__text-box {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	text-align: center;
+	/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
+		So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
+		relative to the element itself)
+	*/
+	&__text-box {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
 }
 
 /* 
@@ -188,13 +189,13 @@ body {
 
 .btn:hover {
 	transform: translateY(-0.3rem);
-	box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+	box-shadow: 0 1rem 2rem rgba($color-black, 0.2);
 }
 
 /* When we have clicked it */
 .btn:active {
 	transform: translate(-0.1rem);
-	box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
 }
 
 .btn--white {
