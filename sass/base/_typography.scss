@@ -1,0 +1,49 @@
+/*
+  Anything related to font is usually specified in the body as that is inherited. Not in the universal selector above
+  Anything applied to the body goes around the entire webpage - eg: padding
+*/
+
+body {
+	font-family: "Lato", sans-serif;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 1.7;
+	color: $color-grey-dark;
+	padding: 3rem;
+	box-sizing: border-box;
+}
+
+/* 
+  We have a h1 element with two bits of text that we want being at different sizes and above one another
+  Use BLOCK element -> this occupies the entire width and ensures the two texts are not inline
+
+  NB/ backface-visibility seems to fix issues with animations moving a little in a direction you didn't specifiy 
+*/
+.heading-primary {
+	color: $color-white;
+	text-transform: uppercase;
+	backface-visibility: hidden;
+	margin-bottom: 6rem;
+
+	&--main {
+		display: block;
+		font-size: 6rem;
+		font-weight: 400;
+		letter-spacing: 3.5rem;
+		animation-name: moveInLeft;
+		animation-duration: 1s;
+		animation-timing-function: ease-out;
+		/*
+		animation-iteration-count: 3;
+		animation-delay: 3s;
+		*/
+	}
+
+	&--sub {
+		display: block;
+		font-size: 2rem;
+		font-weight: 700;
+		letter-spacing: 1.75rem;
+		animation: moveInRight 1s ease-out;
+	}
+}

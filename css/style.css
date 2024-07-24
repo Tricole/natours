@@ -23,86 +23,6 @@ html {
 }
 
 /*
-  Anything related to font is usually specified in the body as that is inherited. Not in the universal selector above
-  Anything applied to the body goes around the entire webpage - eg: padding
-*/
-body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #777;
-  padding: 3rem;
-  box-sizing: border-box;
-}
-
-/*cover ensures it will try to fit to whatever the view is  
-  background-position top ensures that it will always stay at the top of the container. will crop out from the other parts as you resize
-  clip-path allows us to clip the image we want by drawing a polygon for it. ie: specifying the x & y coordinates for each of the corners
-  */
-.header {
-  height: 95vh;
-  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.801), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
-  background-size: cover;
-  background-position: top;
-  position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
-  /* the absolute position is always with reference to a parent container => set the position in the parent to relative */
-  /* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
-  	So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
-  	relative to the element itself)
-  */
-}
-.header__logo-box {
-  position: absolute;
-  top: 4rem;
-  left: 4rem;
-}
-.header__logo {
-  height: 3.5rem;
-}
-.header__text-box {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-}
-
-/* 
-  We have a h1 element with two bits of text that we want being at different sizes and above one another
-  Use BLOCK element -> this occupies the entire width and ensures the two texts are not inline
-
-  NB/ backface-visibility seems to fix issues with animations moving a little in a direction you didn't specifiy 
-*/
-.heading-primary {
-  color: #fff;
-  text-transform: uppercase;
-  backface-visibility: hidden;
-  margin-bottom: 6rem;
-}
-.heading-primary--main {
-  display: block;
-  font-size: 6rem;
-  font-weight: 400;
-  letter-spacing: 3.5rem;
-  animation-name: moveInLeft;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
-  /*
-  animation-iteration-count: 3;
-  animation-delay: 3s;
-  */
-}
-.heading-primary--sub {
-  display: block;
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 1.75rem;
-  animation: moveInRight 1s ease-out;
-}
-
-/*
   CSS ANIMATIONS!
   Use the special keyword @ to start writing an animation. 
 
@@ -138,6 +58,63 @@ body {
     transform: translate(0);
   }
 }
+@keyframes moveInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0);
+  }
+}
+/*
+  Anything related to font is usually specified in the body as that is inherited. Not in the universal selector above
+  Anything applied to the body goes around the entire webpage - eg: padding
+*/
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+/* 
+  We have a h1 element with two bits of text that we want being at different sizes and above one another
+  Use BLOCK element -> this occupies the entire width and ensures the two texts are not inline
+
+  NB/ backface-visibility seems to fix issues with animations moving a little in a direction you didn't specifiy 
+*/
+.heading-primary {
+  color: #fff;
+  text-transform: uppercase;
+  backface-visibility: hidden;
+  margin-bottom: 6rem;
+}
+.heading-primary--main {
+  display: block;
+  font-size: 6rem;
+  font-weight: 400;
+  letter-spacing: 3.5rem;
+  animation-name: moveInLeft;
+  animation-duration: 1s;
+  animation-timing-function: ease-out;
+  /*
+  animation-iteration-count: 3;
+  animation-delay: 3s;
+  */
+}
+.heading-primary--sub {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 1.75rem;
+  animation: moveInRight 1s ease-out;
+}
+
 /*
   psuedoclass -> : special state of a selector (in this case the button selector)
   visited state => the styling after the visitor has clicked on it (we want it to be the same for both here)
@@ -203,20 +180,43 @@ body {
   transition: all 0.4s;
 }
 
-@keyframes moveInBottom {
-  0% {
-    opacity: 0;
-    transform: translateY(3rem);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0);
-  }
-}
 /* animation-fill-mode backwards => all the styles that I had specified or moveInBottom at 0%, they will be applied */
 .btn--animated {
   animation: moveInBottom 0.5 ease-out 0.75s;
   animation-fill-mode: backwards;
+}
+
+/*cover ensures it will try to fit to whatever the view is  
+  background-position top ensures that it will always stay at the top of the container. will crop out from the other parts as you resize
+  clip-path allows us to clip the image we want by drawing a polygon for it. ie: specifying the x & y coordinates for each of the corners
+  */
+.header {
+  height: 95vh;
+  background-image: linear-gradient(to right bottom, rgba(126, 213, 111, 0.801), rgba(40, 180, 133, 0.8)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: top;
+  position: relative;
+  clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+  /* the absolute position is always with reference to a parent container => set the position in the parent to relative */
+  /* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
+       So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
+       relative to the element itself)
+     */
+}
+.header__logo-box {
+  position: absolute;
+  top: 4rem;
+  left: 4rem;
+}
+.header__logo {
+  height: 3.5rem;
+}
+.header__text-box {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

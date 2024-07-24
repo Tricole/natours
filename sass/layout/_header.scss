@@ -1,0 +1,41 @@
+/*cover ensures it will try to fit to whatever the view is  
+  background-position top ensures that it will always stay at the top of the container. will crop out from the other parts as you resize
+  clip-path allows us to clip the image we want by drawing a polygon for it. ie: specifying the x & y coordinates for each of the corners
+  */
+
+.header {
+	height: 95vh;
+	background-image: linear-gradient(
+			to right bottom,
+			rgba($color-primary-light, 0.801),
+			rgba($color-primary-dark, 0.8)
+		),
+		url(../img/hero.jpg);
+	background-size: cover;
+	background-position: top;
+	position: relative;
+	clip-path: polygon(0 0, 100% 0, 100% 75vh, 0 100%);
+
+	/* the absolute position is always with reference to a parent container => set the position in the parent to relative */
+	&__logo-box {
+		position: absolute;
+		top: 4rem;
+		left: 4rem;
+	}
+
+	&__logo {
+		height: 3.5rem;
+	}
+
+	/* so this is the box that encloses the heading elements. It needs to be in a specific place on the parent container
+      So we use absolute. In order to position itself accurately, we use 50% to get it to 50% of parent, and then transform (as this is 
+      relative to the element itself)
+    */
+	&__text-box {
+		position: absolute;
+		top: 40%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+	}
+}
